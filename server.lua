@@ -49,7 +49,7 @@ QBCore.Functions.CreateCallback('nicks-fishing:canAfford', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local money = Player.Functions.GetMoney('cash') -- or 'bank' if you prefer
-    if money >= 500 then -- set your price here
+    if money >= 100 then -- set your price here
         cb(true)
     else
         cb(false)
@@ -60,7 +60,7 @@ RegisterNetEvent('nicks-fishing:giveLicense')
 AddEventHandler('nicks-fishing:giveLicense', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    Player.Functions.RemoveMoney('cash', 500) -- or 'bank' if you prefer
+    Player.Functions.RemoveMoney('cash', 100) -- or 'bank' if you prefer
     Player.Functions.AddItem('license_fishing', 1)
     TriggerClientEvent('QBCore:Notify', src, 'You bought a fishing license.')
 end)
@@ -80,8 +80,8 @@ RegisterNetEvent('nicks-fishing:giveBait')
 AddEventHandler('nicks-fishing:giveBait', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    Player.Functions.RemoveMoney('cash', 500) -- or 'bank' if you prefer
-    Player.Functions.AddItem('fish_bait', 1)
+    Player.Functions.RemoveMoney('cash', 100) -- or 'bank' if you prefer
+    Player.Functions.AddItem('fish_bait', 15)
     TriggerClientEvent('QBCore:Notify', src, 'You bought a fishing bait.')
 end)
 

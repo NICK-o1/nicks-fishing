@@ -1,8 +1,8 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 local fishing = false
-local rodModel = 'prop_fishing_rod_01'
-local rodNetId = 'prop_fishing_rod_01'
+local rodModel = 'prop_fishing_rod_02'
+local rodNetId = NetworkGetNetworkIdFromEntity(rod)
 
 function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
@@ -55,7 +55,8 @@ AddEventHandler('nicks-fishing:startFishing', function()
     end)
 end)
 
-local createdObjects = {}
+-- Declare createdObjects as a global variable
+createdObjects = {}
 
 local function createFishingObject(coords, model, heading)
     RequestModel(model)
@@ -66,12 +67,20 @@ local function createFishingObject(coords, model, heading)
     SetEntityHeading(object, heading)
     FreezeEntityPosition(object, true)
     SetEntityAsMissionEntity(object, true, true)
+    SetEntityDrawOutline(object, Config.SetEntityDrawOutline)
+    SetEntityDrawOutlineColor(table.unpack(Config.SetEntityDrawOutlineColor))
     table.insert(createdObjects, object)
 end
 
-for _, obj in ipairs(Config.ObjectModels) do
-    createFishingObject(obj.coords, GetHashKey(obj.model), obj.heading)
+-- Check if Config.ObjectModels is defined before iterating through it
+if Config.ObjectModels then
+    for _, obj in ipairs(Config.ObjectModels) do
+        createFishingObject(obj.coords, GetHashKey(obj.model), obj.heading)
+    end
+else
+    print("Config.ObjectModels is nil!")
 end
+
 
 local objectInteraction = {
     options = {
@@ -79,6 +88,7 @@ local objectInteraction = {
             event = "nicks-fishing:interactObject",
             icon = "fa-solid fa-fish",
             label = "Start Fishing",
+            iconColor = Config.ColorPalette.green,
         }
     },
     distance = 2.0
@@ -93,7 +103,7 @@ exports['qtarget']:AddTargetModel(objectModelsList, objectInteraction)
 
 RegisterNetEvent("nicks-fishing:interactObject")
 AddEventHandler("nicks-fishing:interactObject", function()
-    TriggerEvent("nicks-fishing:startFishing")
+TriggerEvent("nicks-fishing:startFishing")
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
@@ -123,7 +133,7 @@ end)
 exports['qtarget']:AddBoxZone("LicensePurchase", Config.LicensePurchaseLocation, 1.0, 1.0, {
     name = "LicensePurchase",
     heading = 180,
-    debugPoly = false,
+    debugPoly = Config.DebugPoly,
     minZ = 1.0,
     maxZ = 3.0
 }, {
@@ -132,6 +142,7 @@ exports['qtarget']:AddBoxZone("LicensePurchase", Config.LicensePurchaseLocation,
             event = "nicks-fishing:buyLicense",
             icon = "fa-solid fa-id-card",
             label = "Buy Fishing License",
+            iconColor = Config.ColorPalette.orange,
         }
     },
     distance = 2.0
@@ -151,7 +162,7 @@ end)
 exports['qtarget']:AddBoxZone("BaitPurchase", Config.BaitPurchaseLocation, 1.0, 1.0, {
     name = "BaitPurchase",
     heading = 180,
-    debugPoly = false,
+    debugPoly = Config.DebugPoly,
     minZ = 1.0,
     maxZ = 3.0
 }, {
@@ -160,6 +171,7 @@ exports['qtarget']:AddBoxZone("BaitPurchase", Config.BaitPurchaseLocation, 1.0, 
             event = "nicks-fishing:buyBait",
             icon = "fa-solid fa-fish",
             label = "Buy Fishing Bait",
+            iconColor = Config.ColorPalette.red,
         }
     },
     distance = 2.0
@@ -184,7 +196,7 @@ end)
 exports['qtarget']:AddBoxZone("FishSellingPoint", Config.SellingPointLocation, 1.0, 1.0, {
     name = "FishSellingPoint",
     heading = 45,
-    debugPoly = false,
+    debugPoly = Config.DebugPoly,
     minZ = 1.0,
     maxZ = 3.0
 }, {
@@ -193,6 +205,7 @@ exports['qtarget']:AddBoxZone("FishSellingPoint", Config.SellingPointLocation, 1
             event = "nicks-fishing:sellFish",
             icon = "fa-solid fa-dollar-sign",
             label = "Sell Fish",
+            iconColor = Config.ColorPalette.yellow,
         }
     },
     distance = 2.0
