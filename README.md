@@ -6,7 +6,7 @@ Config File changed alot
 Added images for inventory ←
 
 ↓ Inventory Items Below ↓ ox_inventory ↓
---Fishing--
+
     ["fish_bait"] = {
         label = "fish_bait",
         weight = 1,
