@@ -36,11 +36,19 @@ Config = {
     },
 }
 -- ↓ Shop where you can buy youre fishing license from ↓
-Config.LicensePurchaseLocation = vec4(-1599.3, 5204.89, 4.31, 196.29)
+Config.LicensePurchaseLocation = vec4(386.86, 792.48, 187.69, 355.28)
 -- ↓ Bait shop where you can purchase bait from ↓
-Config.BaitPurchaseLocation = vec4(-1602.11, 5203.58, 4.31, 203.89)
+Config.BaitPurchaseLocation = vec4(-1600.68, 5204.27, 4.31, 194.35)
 -- ↓ Location to sell the fish you have caught ↓
-Config.SellingPointLocation = vec4(-1600.66, 5204.24, 4.31, 207.42)
+Config.SellingPointLocation = vec4(-399.8, 6377.79, 14.05, 195.25)
+
+-- ↓ blips for the locations ↓ --
+Config.Blips = {
+    -- Example {title="", colour=, id=, x=, y=, z=},
+     {title="SellingPointLocation", colour=28, id=356, x = -400.06, y = 6377.67, z = 14.04},
+     {title="BaitPurchaseLocation", colour=17, id=356, x = -1600.77, y = 5204.2, z = 4.31},
+     {title="LicensePurchaseLocation", colour=25, id=356, x = 386.86, y = 792.48, z = 187.69}
+  }
 
 -- ↓ This is the ColorPalette you can add more or change it ↓
 Config.ColorPalette = {
@@ -71,7 +79,6 @@ Config.FishTypes = {
     "o_white_seabass",
     "o_yellowfin_tuna",
     "r_black_crappie",
-    "r_bluegill",
     "r_brown_trout",
     "r_catfish",
     "r_chinook_salmon",
@@ -105,7 +112,6 @@ Config.FishPrices = {
     o_white_seabass = 100,
     o_yellowfin_tuna = 100,
     r_black_crappie = 100,
-    r_bluegill = 100,
     r_brown_trout = 100,
     r_catfish = 100,
     r_chinook_salmon = 100,
