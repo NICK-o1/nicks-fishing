@@ -1,22 +1,15 @@
 # nicks-fishing
-
+************************************
 New Version
 With config file 
-
+************************************
 Use third eye on the props to start fishing.
-
+************************************
 Config.lua ↓
 has debug, locations, prices, props
-
-------------------------
---↓ for Ox_Inventory ↓--
-["fish_bait"] = {
-        label = "fish_bait",
-        weight = 1,
-        stack = true,
-        close = true
-    },
-
+************************************
+For ox_inventory items bellow ↓
+************************************
     ["o_anchovy"] = { 
         label = "Anchovy", 
         weight = 1,
@@ -215,6 +208,13 @@ has debug, locations, prices, props
     
     ["r_white_sturgeon"] = { 
         label = "White Sturgeon", 
+        weight = 1,
+        stack = true,
+        close = true
+    },
+
+    ["fish_bait"] = {
+        label = "fish_bait",
         weight = 1,
         stack = true,
         close = true
