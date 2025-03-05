@@ -5,7 +5,7 @@ With config file
 ************************************
 Use third eye on the props to start fishing.
 ************************************
-Config.lua ↓
+Config.lua →
 has debug, locations, prices, props
 ************************************
 For ox_inventory items bellow ↓
